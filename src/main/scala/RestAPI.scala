@@ -1,7 +1,7 @@
 /*
   yappl.se
   Author: Max Meldrum
- */
+*/
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
@@ -18,7 +18,7 @@ object RestAPI extends Directives with JsonSupport {
     implicit val materializer = ActorMaterializer()
     implicit val executionContext = system.dispatcher
 
-    // Change so you can send in the ip as and argument
+    // Change so you can send in the IP as an argument
     val influxDB = InfluxDB.connect("192.168.0.8", 8086)
     val db = influxDB.selectDatabase("mydb")
 
