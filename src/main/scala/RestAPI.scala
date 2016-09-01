@@ -18,8 +18,14 @@ object RestAPI extends Directives with JsonSupport {
     implicit val materializer = ActorMaterializer()
     implicit val executionContext = system.dispatcher
 
-    // Change so you can send in the IP as an argument
-    val influxDB = InfluxDB.connect("192.168.0.8", 8086)
+    var influxIP = None: Option[String]
+
+    if (args.length == 1) {
+      val ip = args(0)
+      influxIP = Some(ip)
+    }
+
+    val influxDB = InfluxDB.connect(influxIP.getOrElse("localhost"), 8086)
     val db = influxDB.selectDatabase("mydb")
 
     val route =
@@ -38,7 +44,5 @@ object RestAPI extends Directives with JsonSupport {
 
     val bindingFuture = Http().bindAndHandle(route, "localhost", 8080)
     println("Starting up server at localhost:8080")
-    println("curl -H \"Content-Type: application/json\" -X POST -d '{\"hostName\":\"MaxHost\",\"cpu\": 0.00}' http://localhost:8080/dump")
-
   }
 }
