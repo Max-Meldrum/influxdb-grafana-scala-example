@@ -3,8 +3,12 @@
 
 Purpose: Showing how one can use InfluxDB and Grafana to display custom graphs.
 
-How this system works is that there is an Akka HTTP REST interface that we can send requests to. As parameters we can send hostname & CPU value. 
-Then the request is sent into Influxdb. We can then use Grafana with InfluxDB as the datasource and create the graphs below.
+
+REST request -> Akka HTTP -> InfluxDB
+
+
+The REST interface takes hostname & CPU value as parameters, the request is then sent into InfluxDB. 
+Grafana is utilised together with InfluxDB as the datasource to create the graphs below.
 
 ![alt text](https://github.com/Max-Meldrum/influxdb-grafana-scala-example/blob/master/images/datavisualyappl.PNG?raw=true "Grafana")
 
